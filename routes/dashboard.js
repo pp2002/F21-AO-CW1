@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Patient = require("../model/Patient")
+const WardAdmission = require("../model/WardAdmissions")
 // global.dept = ""
 
 // dashboard route
@@ -66,5 +67,43 @@ router.post('/patientDetails', (req, res) => {
     })
   }
 });
+
+router.post('/singlePatientDetails', (req, res) => {
+  if(req.user.designation == "nurse") {
+    Patient.findOne({ patient_contact_no: req.body.patient_contact_no}, {name: 1, _id: 0, patient_disease: 1, department: 1})
+    .then(results => {
+      res.json({ patients: results})
+    })
+  }
+});
+
+
+router.post('/admitPatient', (req, res) => {
+  if(req.user.designation == "nurse") {
+     Patient.findOne({ patient_contact_no: req.body.patient_contact_no}, {_id: 0})
+    .then( async results => {
+      const wardAdm = new WardAdmission({
+        name: results.name,
+        patient_age: results.patient_age,
+        patient_contact_no: req.body.patient_contact_no,
+        patient_disease: results.patient_disease,
+        department: req.user.department,
+        ward: req.body.ward,
+        initial_temperature: req.body.intmp,
+        initial_blood_pressure: req.body.inbp,
+        initial_pulse_rate: req.body.inpr,
+        admitted_by: req.user.name
+      });
+      try {
+    const newWardAssignment = await wardAdm.save();
+    res.json({ error: null, data: { patientName: newWardAssignment.name } });
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+
+    })
+  }
+});
+
 
 module.exports = router;
