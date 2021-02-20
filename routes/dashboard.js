@@ -105,5 +105,14 @@ router.post('/admitPatient', (req, res) => {
   }
 });
 
+router.post('/updateDiseaseDetails', (req, res) => {
+  if(req.user.designation == "nurse") {
+    Patient.updateOne({ "patient_contact_no": req.body.patient_contact_no }, {$set: { "patient_disease": req.body.disease }})
+    .then( () => {
+      res.json({"Update": "success"})
+    })
+  }  
+});
+
 
 module.exports = router;
