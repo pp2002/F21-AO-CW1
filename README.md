@@ -1,19 +1,38 @@
-# To handle authentication with Node JS, Express, Mongo DB, JWT
+# F21-AO-CW1 - Patient Information System using NodeJS and MongoDB Cloud
 
-This project demonstrate how we can use multiple JavaScript Technologies to write a code to handle authentication part for node js application
+This project is a simulation of a patient information system. It contains 3 modules, namely User Authentication, Patient Registrations and Ward Admissions.
 
-# To run the project in development server
+# To run the project
 
-1. Go to `.env` file and update the db credentials and update the scret key.
-2. Go to project root folder `auth >` and run below commands
+1. Go to `.env` file and update the db credentials as well as the secret key.
+2. Go to project root folder `patient-info-system >` and run below commands
 
 ```
 > npm install
+> npm init
 > npm start
 ```
 
-# Pre-requites
+All required packages are included within the package.json file. However, if the application throws errors related to the packages, then issue the following commands:
+
+```
+> npm i express & npm i nodemon -D
+> npm i dotenv
+> npm i mongoose
+> npm i @hapi/joi
+> npm i bcrypt
+> npm i jsonwebtoken
+> npm start
+```
+
+# MongoDB Cloud
+
+After creating the MongoDB cloud account, go to the network access tab and click on add current IP address button. This will connect the host system to the mongodb database and allow for CRUD operations to take place.
+
+# Pre-requisites
 
 1. Node JS v12.16.1 or above.
-2. Visual Studio Code
-3. Postman
+2. Any code editor
+3. Postman (All endpoints can be accessed using Postman)
+4. MongoDB account (to access MongoDB Cloud)
+

@@ -1,14 +1,10 @@
 {
-  "name": "auth",
+  "name": "f21-ao-cw1",
   "version": "1.0.0",
-  "description": "This is a demonstration project for handling token based authentication using node.js, express, mongo, jwt.",
+  "description": "This is a simulation of a patient information system developed using NodeJS and MongoDB cloud",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mohanramphp/auth.git"
   },
   "keywords": [
     "nodejs",
@@ -18,12 +14,8 @@
     "jwt",
     "mongoose"
   ],
-  "author": "Mohan Ram",
+  "author": "Prateek Punjabi",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mohanramphp/auth/issues"
-  },
-  "homepage": "https://github.com/mohanramphp/auth#readme",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "bcrypt": "^5.0.0",
