@@ -27,7 +27,7 @@ All required packages are included within the package.json file. However, if the
 
 # MongoDB Cloud
 
-After creating the MongoDB cloud account, go to the network access tab and click on add current IP address button. This will connect the host system to the mongodb database and allow for CRUD operations to take place.
+A MongoDB Cloud account is required for access to the database and it's collections.
 
 # Pre-requisites
 
