@@ -1,30 +1,33 @@
+// Importing packages
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
+// Importing user schema
 const User = require("../model/User");
 
-// validation
-const { registerValidation, loginValidation } = require("../validation");
+// Importing validation functions
+const { registrationValidation, loginValidation } = require("../validation");
 
-// register route
+// User Registration endpoint
 router.post("/register", async (req, res) => {
-  // validate the user
-  const { error } = registerValidation(req.body);
+  
+  const { error } = registrationValidation(req.body);
 
-  // throw validation errors
-  if (error) return res.status(400).json({ error: error.details[0].message });
+  
+  if (error) return res.status(400).json({ error: error.details[0].message }); // Displaying appropriate error message
 
   const isEmailExist = await User.findOne({ email: req.body.email });
 
-  // throw error when email already registered
+  // If email exists, error thrown
   if (isEmailExist)
     return res.status(400).json({ error: "Email already exists" });
 
-  // hash the password
+  // Encrypting password
   const salt = await bcrypt.genSalt(10);
   const password = await bcrypt.hash(req.body.password, salt);
 
+  // User schema assigned values
   const user = new User({
     name: req.body.name,
     email: req.body.email,
@@ -33,6 +36,7 @@ router.post("/register", async (req, res) => {
     department: req.body.department,
   });
 
+  // Saving user
   try {
     const savedUser = await user.save();
     res.json({ error: null, data: { userId: savedUser._id } });
@@ -41,27 +45,26 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// login route
+// User login endpoint
 router.post("/login", async (req, res) => {
-  // validate the user
+  
   const { error } = loginValidation(req.body);
 
-  // throw validation errors
+  // Displaying appropriate error message
   if (error) return res.status(400).json({ error: error.details[0].message });
 
   const user = await User.findOne({ email: req.body.email });
 
-  // throw error when email is wrong
-  if (!user) return res.status(400).json({ error: "Email is wrong" });
+  
+  if (!user) return res.status(400).json({ error: "Incorrect email" });
 
-  // check for password correctness
+  
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword)
-    return res.status(400).json({ error: "Password is wrong" });
+    return res.status(400).json({ error: "Incorrect password" });
 
-  // create token
+  // Adding payload to token
   const token = jwt.sign(
-    // payload data
     {
       name: user.name,
       designation: user.designation,
@@ -71,6 +74,7 @@ router.post("/login", async (req, res) => {
     process.env.TOKEN_SECRET
   );
 
+  // Passing token as header to perform functions after logging in
   res.header("auth-token", token).json({
     error: null,
     data: {
@@ -79,4 +83,5 @@ router.post("/login", async (req, res) => {
   });
 });
 
+// Exporting module
 module.exports = router;

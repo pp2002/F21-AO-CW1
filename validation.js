@@ -1,6 +1,8 @@
+// Importing validation library
 const Joi = require("@hapi/joi");
 
-const registerValidation = (data) => {
+// Validation function for registration
+const registrationValidation = (data) => {
   const schema = Joi.object({
     name: Joi.string().min(6).max(255).required(),
     email: Joi.string().min(6).max(255).required().email(),
@@ -12,6 +14,7 @@ const registerValidation = (data) => {
   return schema.validate(data);
 };
 
+// Validation function for login
 const loginValidation = (data) => {
   const schema = Joi.object({
     email: Joi.string().min(6).max(255).required().email(),
@@ -21,7 +24,9 @@ const loginValidation = (data) => {
   return schema.validate(data);
 };
 
+
+// Exporting functions
 module.exports = {
-  registerValidation,
+  registrationValidation,
   loginValidation,
 };

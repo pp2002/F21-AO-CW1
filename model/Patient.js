@@ -1,5 +1,7 @@
+// Importing mongoose package
 const mongoose = require("mongoose");
 
+// Defining patient schema
 const patientSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -25,7 +27,10 @@ const patientSchema = new mongoose.Schema({
   },
   department: {
     type: String,
+    required: true,
   },
 });
 
+
+// Exporting schema
 module.exports = mongoose.model("Patient", patientSchema);

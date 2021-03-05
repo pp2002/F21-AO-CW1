@@ -1,5 +1,8 @@
+// Importing mongoose package
 const mongoose = require("mongoose");
 
+
+// Defining user schema
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -34,4 +37,5 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+// Exporting schema
 module.exports = mongoose.model("User", userSchema);

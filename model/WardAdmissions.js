@@ -1,5 +1,7 @@
+// Importing mongoose package
 const mongoose = require("mongoose");
 
+// Defining ward admissions schema
 const wardSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -49,4 +51,5 @@ const wardSchema = new mongoose.Schema({
   },
 });
 
+// Exporting schema
 module.exports = mongoose.model("WardAdmissions", wardSchema);
