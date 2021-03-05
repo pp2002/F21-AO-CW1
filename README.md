@@ -4,7 +4,7 @@ This project is a simulation of a patient information system. It contains 3 modu
 
 # To run the project
 
-1. Go to `.env` file and update the db credentials as well as the secret key.
+1. Go to `.env` file and update the secret key.
 2. Go to project root folder `patient-info-system >` and run below commands
 
 ```
