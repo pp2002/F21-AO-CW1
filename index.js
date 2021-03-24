@@ -4,7 +4,9 @@ const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
-// Initializing environment variables
+// Github webhook test
+
+// Initializing environment variables 
 dotenv.config();
 
 // Connecting to MongoDB and displaying message in console
