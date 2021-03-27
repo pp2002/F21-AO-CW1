@@ -1,6 +1,8 @@
 // Importing validation library
 const Joi = require("@hapi/joi");
 
+// Webhook test 2
+
 // Validation function for registration
 const registrationValidation = (data) => {
   const schema = Joi.object({
