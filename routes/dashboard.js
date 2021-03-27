@@ -2,6 +2,8 @@
 const router = require("express").Router();
 const Patient = require("../model/Patient")
 const WardAdmission = require("../model/WardAdmissions")
+const User = require("../model/User")
+const { registrationValidation, loginValidation, patientValidation, wardAdminValidation} = require("../validation");
 
 
 
@@ -57,11 +59,18 @@ router.post('/registerPatient', async (req, res) => {
     		patient_disease: req.body.patient_disease,
     		department: req.user.department,
   		});
+      const { error } = patientValidation(req.body);
+      if (error) return res.status(400).json({ error: error.details[0].message });
 
+      const isContactExist = await Patient.findOne({ patient_contact_no: req.body.patient_contact_no });
+
+    // If email exists, error thrown
+    if (isContactExist)
+      return res.status(400).json({ error: "Patient already exists" });
     // Saving patient details
 		try {
     const savedPatient = await patient.save();
-    res.json({ error: null, data: { patientName: savedPatient.name } });
+    res.status(200).json({ error: null, data: { patientName: savedPatient.name } });
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -89,7 +98,7 @@ router.post('/singlePatientDetails', (req, res) => {
   if(req.user.designation == "nurse" || req.user.designation == "doctor") {
     Patient.findOne({ patient_contact_no: req.body.patient_contact_no}, {name: 1, _id: 0, patient_disease: 1, department: 1})
     .then(results => {
-      res.json({ patients: results})
+      res.status(200).json({ patients: results})
     })
   }
   else {
@@ -110,16 +119,25 @@ router.post('/admitPatient', (req, res) => {
         patient_disease: results.patient_disease,
         department: req.user.department,
         ward: req.body.ward,
-        initial_temperature: req.body.intmp,
-        initial_blood_pressure: req.body.inbp,
-        initial_pulse_rate: req.body.inpr,
+        initial_temperature: req.body.initial_temperature,
+        initial_blood_pressure: req.body.initial_blood_pressure,
+        initial_pulse_rate: req.body.initial_pulse_rate,
         admitted_by: req.user.name
       });
+
+      const { error } = wardAdminValidation(req.body);
+      if (error) return res.status(400).json({ error: error.details[0].message });
+
+      const isContactExist = await WardAdmission.findOne({ patient_contact_no: req.body.patient_contact_no });
+
+    // If email exists, error thrown
+    if (isContactExist)
+      return res.status(400).json({ error: "Patient already exists" });
 
       // Saving ward admission details
       try {
     const newWardAssignment = await wardAdm.save();
-    res.json({ error: null, data: { patientName: newWardAssignment.name } });
+    res.status(200).json({ error: null, data: { patientName: newWardAssignment.name } });
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -144,9 +162,33 @@ router.post('/updateDiseaseDetails', (req, res) => {
     })
   }
   else {
-    res.json({ error: "Invalid user"});
+    res.status(400).json({ error: "Invalid user"});
   }
 });
+
+
+router.post('/delete', async (req, res) => {
+  WardAdmission.updateOne({"patient_contact_no": "232425"}, {$set: { "patient_disease": "Tubercolosis" }})
+  .then(() => {
+    
+  })
+
+  Patient.updateOne({"patient_contact_no": "232425"}, {$set: { "patient_disease": "Tubercolosis" }})
+  .then(() => {
+    
+  })
+
+  Patient.deleteOne({"patient_contact_no": "987654321"})
+  .then(() => {
+    
+  })
+
+  User.deleteOne({"email": "rahulsgd12345@gmail.com"})
+  .then(() => {
+    res.json({"cleanup": "success"})
+  })
+
+})
 
 // Exporting module
 module.exports = router;

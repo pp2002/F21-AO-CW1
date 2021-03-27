@@ -30,4 +30,4 @@ app.use("/api/user", authRoutes);
 app.use("/api/dashboard", verifyToken, dashboardRoutes);
 
 // Starting server on port 3000
-app.listen(3000, () => console.log("Server is running!"));
+module.exports = app.listen(3000, () => console.log("Server is running!"));

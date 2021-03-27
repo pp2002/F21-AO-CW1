@@ -25,8 +25,34 @@ const loginValidation = (data) => {
 };
 
 
+const patientValidation = (data) => {
+  const schema = Joi.object({
+    name: Joi.string().required(),
+    patient_age: Joi.string().max(3).required(),
+    patient_contact_no: Joi.string().required(),
+    patient_disease: Joi.string().min(5).required(),
+  });
+
+  return schema.validate(data);
+};
+
+const wardAdminValidation = (data) => {
+  const schema = Joi.object({
+    patient_contact_no: Joi.string().required(),
+    ward: Joi.string().required(),
+    initial_temperature: Joi.number().required(),
+    initial_blood_pressure: Joi.number().required(),
+    initial_pulse_rate: Joi.number().required(),
+  });
+
+  return schema.validate(data);
+};
+
+
 // Exporting functions
 module.exports = {
   registrationValidation,
   loginValidation,
+  patientValidation,
+  wardAdminValidation,
 };

@@ -5,11 +5,9 @@ const mongoose = require("mongoose");
 const wardSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
   },
   patient_age: {
     type: String,
-    required: true,
     max: 3,
   },
   patient_contact_no: {
@@ -22,12 +20,10 @@ const wardSchema = new mongoose.Schema({
   },
   patient_disease: {
     type: String,
-    required: true,
     min: 5,
   },
   department: {
     type: String,
-    required: true,
   },
   ward: {
     type: String,
@@ -47,7 +43,6 @@ const wardSchema = new mongoose.Schema({
   },
   admitted_by: {
     type: String,
-    required: true,
   },
 });
 

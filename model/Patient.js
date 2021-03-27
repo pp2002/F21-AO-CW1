@@ -27,7 +27,6 @@ const patientSchema = new mongoose.Schema({
   },
   department: {
     type: String,
-    required: true,
   },
 });
 

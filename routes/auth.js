@@ -7,7 +7,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../model/User");
 
 // Importing validation functions
-const { registrationValidation, loginValidation } = require("../validation");
+const { registrationValidation, loginValidation, patientValidation, wardAdminValidation } = require("../validation");
 
 // User Registration endpoint
 router.post("/register", async (req, res) => {
@@ -39,7 +39,7 @@ router.post("/register", async (req, res) => {
   // Saving user
   try {
     const savedUser = await user.save();
-    res.json({ error: null, data: { userId: savedUser._id } });
+    res.status(200).json({ error: null, data: { userId: savedUser._id } });
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -82,6 +82,16 @@ router.post("/login", async (req, res) => {
     },
   });
 });
+
+router.post("/del", async(req,res) => {
+
+  try {
+    const deletedUser = await User.deleteOne({email: "rahulsgd12345@gmail.com"});
+    res.status(200).json({ error: null});
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+})
 
 // Exporting module
 module.exports = router;
