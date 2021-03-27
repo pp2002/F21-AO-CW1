@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh 'C:/Program Files/nodejs/npm install'
-                echo "Working"
+                withTool('nodejs')
+                sh 'npm install'
             }
         }
     }
