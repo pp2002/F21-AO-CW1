@@ -14,7 +14,7 @@ pipeline {
         stage('Test') { 
             steps {
                 nodejs('nodejs'){
-                    sh 'mocha --exit'
+                    sh 'npm test'
                 }
                 
             }
