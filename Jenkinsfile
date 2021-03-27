@@ -4,8 +4,10 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                withTool('nodejs')
-                sh 'npm install'
+                nodejs('nodejs'){
+                    sh 'npm install'
+                }
+                
             }
         }
     }
