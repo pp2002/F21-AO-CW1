@@ -4,8 +4,7 @@
   "description": "This is a simulation of a patient information system developed using NodeJS and MongoDB cloud",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "mocha"
+    "test": "mocha --exit"
   },
   "keywords": [
     "nodejs",
