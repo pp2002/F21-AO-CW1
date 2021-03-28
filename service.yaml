@@ -6,8 +6,9 @@ metadata:
     app.kubernetes.io/name: f21ao-service
     app.kubernetes.io/component: f21aoservice
 spec:
-  #type: NodePort
-  hostNetwork: true
+  type: NodePort
+  #hostNetwork: true
+  externalIPS: localhost
   ports:
     - port: 8095
       protocol: TCP
