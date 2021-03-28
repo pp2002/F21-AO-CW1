@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: f21ao-cw2
-          image: pp2002/f21ao:latest
+          image: pp2002/f21ao:latest # Built image
           imagePullPolicy: Never # use local image
           ports:
             - containerPort: 8095
