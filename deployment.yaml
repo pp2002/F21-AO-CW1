@@ -22,4 +22,4 @@ spec:
           image: pp2002/f21ao:latest
           imagePullPolicy: Never # use local image
           ports:
-            - containerPort: 8088
+            - containerPort: 8095
