@@ -23,20 +23,3 @@ spec:
           imagePullPolicy: Never # use local image
           ports:
             - containerPort: 8088
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: f21ao-cw2
-  labels:
-    app: f21ao-cw2-deploy
-spec:
-  type: NodePort
-  ports:
-  - port: 8088
-    protocol: TCP
-    targetPort: 8088
-    nodePort: 32121
-  selector:
-    app: f21ao-cw2-deploy
