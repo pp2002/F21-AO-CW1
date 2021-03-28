@@ -7,13 +7,10 @@ metadata:
     app.kubernetes.io/component: f21aoservice
 spec:
   type: NodePort
-  #hostNetwork: true
-  externalIPS: localhost
   ports:
-    - port: 8095
+    - port: 3000
       protocol: TCP
-      targetPort: 8095
-      nodePort: 32111
+      targetPort: 3000
   selector:
     app.kubernetes.io/name: f21ao-service
     app.kubernetes.io/component: f21aoservice
