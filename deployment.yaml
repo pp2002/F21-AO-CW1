@@ -15,7 +15,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: f21ao-cw2-deploy
-        app.kubernetes.io/component: f21ao-cw2-deploy
+        app.kubernetes.io/component: f21ao-cw2-deploy # test comment
     spec:
       containers:
         - name: f21ao-cw2 # Name of container
