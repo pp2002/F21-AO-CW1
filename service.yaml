@@ -7,6 +7,7 @@ metadata:
     app.kubernetes.io/component: f21aoservice
 spec:
   type: LoadBalancer
+  hostNetwork: true
   ports:
     - port: 8095
       protocol: TCP
