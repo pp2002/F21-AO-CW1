@@ -39,6 +39,7 @@ pipeline {
         stage('Deploying into k8s'){
             steps{
                 bat 'kubectl apply -f deployment.yaml' 
+                bat 'kubectl expose deployment f21ao --type=NodePort --name=service'
             }
         }
         
