@@ -18,7 +18,7 @@ spec:
         app.kubernetes.io/component: f21ao-cw2-deploy
     spec:
       containers:
-        - name: f21ao-cw2
+        - name: f21ao-cw2 # Name of container
           image: pp2002/f21ao:latest # Built image
           imagePullPolicy: Never # use local image
           ports:
