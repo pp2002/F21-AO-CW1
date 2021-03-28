@@ -39,7 +39,7 @@ pipeline {
         stage('Deploying into k8s'){
             steps{
                 bat 'kubectl apply -f deployment.yaml' 
-                bat 'kubectl expose deployment f21ao-cw2 --type=LoadBalancer --name=service'
+                bat 'kubectl expose deployment f21ao-cw2 --type=NodePort --name=service'
             }
         }
         
