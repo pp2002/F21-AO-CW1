@@ -8,10 +8,10 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 8088
+    - port: 8095
       protocol: TCP
-      targetPort: 8088
-      nodePort: 32121
+      targetPort: 8095
+      nodePort: 32111
   selector:
     app.kubernetes.io/name: f21ao-service
     app.kubernetes.io/component: f21aoservice
