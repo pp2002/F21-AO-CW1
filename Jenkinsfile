@@ -1,4 +1,9 @@
 pipeline {
+    environment {
+    registry = "pp2002/f21ao"
+    registryCredential = 'dockerhub_id'
+    dockerImage = ''
+  }
     
     agent any
     
