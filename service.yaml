@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/name: f21ao-service
     app.kubernetes.io/component: f21aoservice
 spec:
-  type: LoadBalancer
+  #type: NodePort
   hostNetwork: true
   ports:
     - port: 8095
