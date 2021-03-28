@@ -8,9 +8,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 3000
+    - port: 8095
       protocol: TCP
-      targetPort: 3000
+      targetPort: 8095
   selector:
     app.kubernetes.io/name: f21ao-service
     app.kubernetes.io/component: f21aoservice
