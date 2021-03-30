@@ -40,6 +40,7 @@ pipeline {
             steps{
                 bat 'kubectl apply -f deployment.yaml' 
                 bat 'kubectl expose deployment f21ao-cw2 --type=NodePort --name=service'
+                jiraSendDeploymentInfo environmentId: 'prod-localhost', environmentName: 'localhost production', environmentType: 'development', issueKeys: ['FA21'], serviceIds: [''], site: 'f21ao-cw-dev.atlassian.net', state: 'successful'
             }
         }
         
